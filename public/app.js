@@ -16,7 +16,7 @@ firebase.auth().onAuthStateChanged(user=>{
 
 document.getElementById("btnLogin").addEventListener('click', function(e){
 
-    // I want Access Token that is why I am using signInWithRedirect ... if I just wanted Authentication I would 
+    // VERY VERY IMP!!!!!!!!!!!!!!!!!!!!!!!!!!!  I want Access Token that is why I am using signInWithRedirect ... if I just wanted Authentication I would 
     // call the function signInWithPopup instead
     firebase.auth().signInWithRedirect(provider).then(function(result) {
         // This gives you a Google Access Token. You can use it to access the Google API.
