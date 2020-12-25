@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FireBase Sample</title>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyDOVrZaDOErT4-3NzDdfkkzdvDn2_yEYQ8",
+    authDomain: "fir-project1-46498.firebaseapp.com",
+    projectId: "fir-project1-46498",
+    storageBucket: "fir-project1-46498.appspot.com",
+    messagingSenderId: "251936092381",
+    appId: "1:251936092381:web:d87874df4cc85250172b34",
+    measurementId: "G-WJNEE2L2ED"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+<script src="app.js" defer></script>
+</head>
+<body>
+    
+   <input id="btnLogin" type="button" value="login" />
+
+   <input id="btnLogout" type="button" value="logout" />
+
+
+   <div id="result">Results here</div>
+</body>
+</html>
