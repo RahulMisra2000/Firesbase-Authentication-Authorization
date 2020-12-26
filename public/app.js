@@ -1,27 +1,30 @@
-console.log("FIREBASE:", firebase);
+// Just update the UI -----------------------------------------------------------------------------------------------
+firebase.auth().onAuthStateChanged(user=>{   // fires when the app starts or when the user logs in or logs out
+  console.log("OnAuthStateChanged: User is:", user );
 
-var provider = new firebase.auth.GoogleAuthProvider();
-
-// Next 2 lines so that I can request an oAuth Access Token
-provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-provider.addScope('https://www.googleapis.com/auth/drive.metadata.readonly');
-
-
-// Just update the UI 
-firebase.auth().onAuthStateChanged(user=>{
-    console.log("OnAuthStateChanged: User is:", user );
-
-    if (user){                                                              // user is logged in
-        document.getElementById("btnLogin").style.display = "none";
-        document.getElementById("btnLogout").style.display = "block";        
-    } else {                                                                // user is not logged in
-      document.getElementById("btnLogin").style.display = "block";
-      document.getElementById("btnLogout").style.display = "none";  
-    }
+  if (user){                                                              // user is logged in
+      document.getElementById("btnLogin").style.display = "none";
+      document.getElementById("btnLogout").style.display = "block";        
+  } else {                                                                // user is not logged in
+    document.getElementById("btnLogin").style.display = "block";
+    document.getElementById("btnLogout").style.display = "none";  
+  }
 });
 
 
-// LOGIN 
+// Just Informational ------------------------------------------------------------------------------------------------
+console.log("FIREBASE:", firebase);
+console.log("firebase.auth():", firebase.auth());
+
+
+// Which Authentication Provider will we use -------------------------------------------------------------------------
+var provider = new firebase.auth.GoogleAuthProvider();
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');             // so we can get an AccessTokem
+provider.addScope('https://www.googleapis.com/auth/drive.metadata.readonly');       // so we can get an AccessTokem
+
+
+
+// LOGIN --------------------------------------------------------------------------------------------------------------
 document.getElementById("btnLogin").addEventListener('click', function(e){
 
     // VERY VERY IMP!!!!!!!!!!!!!!!!!!!!!!!!!!!  I want Access Token that is why I am using signInWithRedirect ... if I just wanted Authentication I would 
@@ -49,7 +52,7 @@ document.getElementById("btnLogin").addEventListener('click', function(e){
 });
 
 
-// GET ACCESS TOKEN
+// GET ACCESS TOKEN ---------------------------------------------------------------------------------------------------
 firebase.auth().getRedirectResult().then(function(result) {
   
     console.log("getRedirectResult():", result); 
@@ -73,7 +76,7 @@ firebase.auth().getRedirectResult().then(function(result) {
   });
 
 
-// LOGOUT
+// LOGOUT ------------------------------------------------------------------------------------------------------------
 document.getElementById("btnLogout").addEventListener('click', function(e){
   firebase.auth().signOut();
 });
