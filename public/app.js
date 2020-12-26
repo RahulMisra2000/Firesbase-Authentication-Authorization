@@ -1,4 +1,5 @@
-console.log(firebase);
+console.log("FIREBASE:", firebase);
+
 var provider = new firebase.auth.GoogleAuthProvider();
 
 // Next 2 lines so that I can request an oAuth Access Token
@@ -6,11 +7,14 @@ provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 provider.addScope('https://www.googleapis.com/auth/drive.metadata.readonly');
 
 firebase.auth().onAuthStateChanged(user=>{
+    console.log("OnAuthStateChanged: User is:", user );
 
-    if (user){
-        document.getElementById("result").innerText += " Logged In";
-    } else {
-        document.getElementById("result").innerText += " Logged Out";
+    if (user){                                                              // user is logged in
+        document.getElementById("btnLogin").style.display = "none";
+        document.getElementById("btnLogout").style.display = "block";        
+    } else {                                                                // user is not logged in
+      document.getElementById("btnLogin").style.display = "block";
+      document.getElementById("btnLogout").style.display = "none";  
     }
 });
 
@@ -19,10 +23,11 @@ document.getElementById("btnLogin").addEventListener('click', function(e){
     // I want Access Token that is why I am using signInWithRedirect ... if I just wanted Authentication I would 
     // call the function signInWithPopup instead
     firebase.auth().signInWithRedirect(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
+        
+        var token = result.credential.accessToken;  // This gives you a Google Access Token. You can use it to access the Google API.        
+        var user = result.user;                   // The signed-in user info.
+
+        console.log("signInWithRedirect():", result);
 
         document.getElementById("result").innerText = user.displayName;  // check F12/Application/IndexedDB/FirebaseLocal Storage for structure of user
         // ...
@@ -40,10 +45,11 @@ document.getElementById("btnLogin").addEventListener('click', function(e){
 });
 
 firebase.auth().getRedirectResult().then(function(result) {
+  
+    console.log("getRedirectResult():", result); 
     if (result.credential) {
       // This gives you a Google Access Token. You can use it to access the Google API.
       var token = result.credential.accessToken;
-      console.log("This is the Access Token:", token);
       // ...
     }
     // The signed-in user info.
