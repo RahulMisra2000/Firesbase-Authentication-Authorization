@@ -6,6 +6,8 @@ var provider = new firebase.auth.GoogleAuthProvider();
 provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 provider.addScope('https://www.googleapis.com/auth/drive.metadata.readonly');
 
+
+// Just update the UI 
 firebase.auth().onAuthStateChanged(user=>{
     console.log("OnAuthStateChanged: User is:", user );
 
@@ -18,6 +20,8 @@ firebase.auth().onAuthStateChanged(user=>{
     }
 });
 
+
+// LOGIN 
 document.getElementById("btnLogin").addEventListener('click', function(e){
 
     // VERY VERY IMP!!!!!!!!!!!!!!!!!!!!!!!!!!!  I want Access Token that is why I am using signInWithRedirect ... if I just wanted Authentication I would 
@@ -44,6 +48,8 @@ document.getElementById("btnLogin").addEventListener('click', function(e){
       });
 });
 
+
+// GET ACCESS TOKEN
 firebase.auth().getRedirectResult().then(function(result) {
   
     console.log("getRedirectResult():", result); 
@@ -67,7 +73,7 @@ firebase.auth().getRedirectResult().then(function(result) {
   });
 
 
-
+// LOGOUT
 document.getElementById("btnLogout").addEventListener('click', function(e){
-firebase.auth().signOut();
+  firebase.auth().signOut();
 });
